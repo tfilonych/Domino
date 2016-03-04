@@ -1,0 +1,34 @@
+#container {
+    height: 200px;
+    width: 100px;
+    background: #ebebec;
+    position: relative;
+    left: 0;
+    top: 0;
+    border-radius: 6px;
+    margin: 0 auto;
+    box-shadow: 8px 5px 5px grey;
+}
+#upperSide, #downSide {
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+.divider {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 90px;
+    height: 3px;
+    background: black;
+    box-shadow: 0 3px white;
+}
+.cycle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: -webkit-radial-gradient(50% 80%, #ddd, black, black);
+    border-radius: 50%;
+}
+
