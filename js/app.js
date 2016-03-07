@@ -14,25 +14,57 @@
     var def = Domino.prototype;
 
     def.createContainer = function() {
-        var container = document.createElement('div'),
-            divider = document.createElement('div');
+        var container = def.createEl('div'),
+            divider = def.createEl('div');
 
         container.style.transform = "rotate(0deg)";
         container.setAttribute('draggable', true);
+        container.setAttribute('id', 'container');
 
         divider.setAttribute('class', 'divider');
 
-        container.appendChild(def.createUpperSide());
-        container.appendChild(divider);
-        container.appendChild(def.createDownSide());
-        container.setAttribute('id', 'container');
+        def.appendChild(container, def.createUpperSide())
+            .appendChild(container, divider)
+            .appendChild(container, def.createDownSide());
+
         document.body.appendChild(container);
 
+        def.createBtn();
         def.addListeners();
+    };
+
+    def.appendChild = function(el, child) {
+        el.appendChild(child);
+
+        return this;
+    };
+
+    def.createBtn = function() {
+        var controls = def.createEl('div'),
+            btn,
+            buttons = [
+                {id: 'moveToRightBtn', val: 'Rotate Right'},
+                {id: 'moveToLeftBtn',  val: 'Rotate Left'},
+                {id: 'resetBtn',       val: 'RESET'}
+            ];
+
+        controls.setAttribute('class', 'controls');
+
+        for (var i=0; i<buttons.length; i++) {
+            btn = def.createEl('button');
+            btn.setAttribute('id', buttons[i].id);
+            btn.innerHTML = buttons[i].val;
+            controls.appendChild(btn);
+        }
+        document.body.appendChild(controls);
     };
 
     def.getEl = function(id) {
         return document.getElementById(id);
+    };
+
+    def.createEl = function(el) {
+        return document.createElement(el);
     };
 
     def.addListeners = function() {
@@ -73,13 +105,13 @@
     def.createDownSide = function() {
         var count = def.getRandom(),
             data = def.getData(count),
-            downSide = document.createElement('div');
+            downSide = def.createEl('div');
 
         downSide.setAttribute('id', 'downSide');
 
         if (data) {
             for (var i=0; i<data.position.length; i++) {
-                var cycle = document.createElement('div');
+                var cycle = def.createEl('div');
                 cycle.setAttribute('class', 'cycle');
                 cycle.style.top = data.position[i].top;
                 cycle.style.left = data.position[i].left;
@@ -92,13 +124,13 @@
     def.createUpperSide = function() {
         var count = def.getRandom(),
             data = def.getData(count),
-            upperSide = document.createElement('div');
+            upperSide = def.createEl('div');
 
         upperSide.setAttribute('id', 'upperSide');
 
         if (data) {
             for (var i=0; i<data.position.length; i++) {
-                var cycle = document.createElement('div');
+                var cycle = def.createEl('div');
                 cycle.setAttribute('class', 'cycle');
                 cycle.style.top = data.position[i].top;
                 cycle.style.left = data.position[i].left;
@@ -144,7 +176,7 @@
     def.moveToLeft = function() {
         var rotate = def.getRotateValue(),
             el = def.getEl('container'),
-            deg = rotate + 90;
+            deg = rotate - 90;
 
         el.style.transform = "rotate(" + deg + "deg) ";
     };
@@ -165,5 +197,6 @@
     window.onload = domino.createContainer();
 
 })();
+
 
 

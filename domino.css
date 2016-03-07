@@ -31,4 +31,22 @@
     background: -webkit-radial-gradient(50% 80%, #ddd, black, black);
     border-radius: 50%;
 }
+.controls {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.controls button {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    font-family: sans-serif Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px grey;
+    display: block;
+    margin: 10px;
+    float: left;
+}
+
 
